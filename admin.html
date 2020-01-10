@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="./node_modules/uikit/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./node_modules/uikit/dist/js/uikit.min.js"></script>
+    <script src="./node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="./js/Models/Product.js"></script>
+    <script src="./js/Models/Order.js"></script>
+    <script src="./js/Models/Customer.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="./index.html">Pocetna</a></li>
+                <li><a href="./korpa.html">Korpa</a></li>
+                <li><a href="#">Admin</a></li>
+            </ul>
+
+        </div>
+        <div class="uk-navbar-right">
+
+            <ul class="uk-navbar-nav uk-margin-medium-right">
+                <li class="uk-active clickableClass" uk-toggle="target: #offcanvas-push" onclick="logout()">Logout</li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="uk-width-1-2 uk-align-center">
+        <ul uk-tab>
+            <li><a href="#">Proizvodi</a></li>
+            <li><a href="#">Porudzbine</a></li>
+        </ul>
+
+        <ul class="uk-switcher uk-margin">
+            <li>
+                <h4>Lista proizvoda</h4>
+            </li>
+            <li>Lista porudzbina</li>
+        </ul>
+    </div>
+
+
+
+</body>
+
+</html>
