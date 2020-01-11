@@ -5,30 +5,40 @@ let totalPrice;
 
 function getItemsInCart() {
     $('#cartContent').html('');
-    productList.filter(pr => pr.numberToOrder > 0).forEach(pr => {
-        $('#cartContent').append(`
+    productList
+        .filter(pr => pr.numberToOrder > 0)
+        .forEach(pr => {
+            $('#cartContent').append(`
             <tr id="cart_${pr.id}">
-                <td class="clickableClass" onclick="removeProductFromCart('${pr.id}')" style="padding:0px;"><span uk-icon="icon: trash"></span></td>
+                <td class="clickableClass" onclick="removeProductFromCart('${
+                  pr.id
+                }')" style="padding:0px;"><span uk-icon="icon: trash"></span></td>
                 <td><img class="uk-preserve-width uk-border-circle" src="./test.jpg" width="40" alt=""></td>
                 <td class="uk-text-nowrap">${pr.name}</td>
-                <td class="uk-text-nowrap"><span class="clickableClass" onclick="removeOneFromCart('${pr.id}');">- </span><span class="kolicina">${pr.numberToOrder}</span><span class="clickableClass" onclick="addOneToCart('${pr.id}');"> +</span></td>
-                <td class="uk-text-nowrap price">${pr.price*pr.numberToOrder} rsd</td>
+                <td class="uk-text-nowrap"><span class="clickableClass" onclick="removeOneFromCart('${
+                  pr.id
+                }');">- </span><span class="kolicina">${
+        pr.numberToOrder
+      }</span><span class="clickableClass" onclick="addOneToCart('${
+        pr.id
+      }');"> +</span></td>
+                <td class="uk-text-nowrap price">${pr.price *
+                  pr.numberToOrder} rsd</td>
             </tr>
         `);
-        productsToOrder = productsToOrder + pr.numberToOrder;
+            productsToOrder = productsToOrder + pr.numberToOrder;
 
-        updateTotalPrice();
-        console.log('getItemsInCart');
+            updateTotalPrice();
+            console.log('getItemsInCart');
 
-        enableButton('firstStepNextBtn');
-    })
-
+            enableButton('firstStepNextBtn');
+        });
 }
 
 function removeOneFromCart(prId) {
     let targetedProduct;
     productList.forEach(pr => {
-        if (pr.id === prId) {
+        if (pr.id.toString() === prId) {
             if (pr.numberToOrder > 0) {
                 pr.numberToOrder--;
                 productsToOrder--;
@@ -37,8 +47,12 @@ function removeOneFromCart(prId) {
         }
     });
     elId = 'cart_' + prId;
-    let numberToChange = document.getElementById(elId).getElementsByClassName('kolicina')[0];
-    numberToChange.textContent = targetedProduct.numberToOrder;
+    let numberToChange = document
+        .getElementById(elId)
+        .getElementsByClassName('kolicina')[0];
+    if (targetedProduct) {
+        numberToChange.textContent = targetedProduct.numberToOrder;
+    }
     updatePrice(prId);
     updateTotalPrice();
 
@@ -50,7 +64,7 @@ function removeOneFromCart(prId) {
 function addOneToCart(prId) {
     let targetedProduct;
     productList.forEach(pr => {
-        if (pr.id === prId) {
+        if (pr.id.toString() === prId) {
             if (pr.numberToOrder < pr.numberOnStock) {
                 pr.numberToOrder++;
                 productsToOrder++;
@@ -59,7 +73,9 @@ function addOneToCart(prId) {
         }
     });
     elId = 'cart_' + prId;
-    let numberToChange = document.getElementById(elId).getElementsByClassName('kolicina')[0];
+    let numberToChange = document
+        .getElementById(elId)
+        .getElementsByClassName('kolicina')[0];
     numberToChange.textContent = targetedProduct.numberToOrder;
     updatePrice(prId);
     updateTotalPrice();
@@ -74,32 +90,34 @@ function addOneToCart(prId) {
 function updatePrice(prId) {
     let targetedProduct;
     productList.forEach(pr => {
-        if (pr.id === prId) {
+        if (pr.id.toString() === prId) {
             targetedProduct = pr;
         }
     });
     elId = 'cart_' + prId;
-    let numberToChange = document.getElementById(elId).getElementsByClassName('price')[0];
-    numberToChange.textContent = `${targetedProduct.numberToOrder*targetedProduct.price} rsd`;
+    let numberToChange = document
+        .getElementById(elId)
+        .getElementsByClassName('price')[0];
+    numberToChange.textContent = `${targetedProduct.numberToOrder *
+    targetedProduct.price} rsd`;
 }
 
 function updateTotalPrice() {
-
     totalPrice = 0;
-    productList.filter(pr => pr.numberToOrder > 0).forEach(pr => {
-        totalPrice += pr.numberToOrder * pr.price;
-        console.log('total price: ', totalPrice);
-
-    })
+    productList
+        .filter(pr => pr.numberToOrder > 0)
+        .forEach(pr => {
+            totalPrice += pr.numberToOrder * pr.price;
+            console.log('total price: ', totalPrice);
+        });
     let numberToChange = document.getElementsByClassName('totalPrice')[0];
     numberToChange.textContent = `${totalPrice}`;
 }
 
 function removeProductFromCart(prId) {
-
     let targetedProduct;
     productList.forEach(pr => {
-        if (pr.id === prId) {
+        if (pr.id.toString() === prId) {
             productsToOrder = productsToOrder - pr.numberToOrder;
             pr.numberToOrder = 0;
             targetedProduct = pr;
@@ -115,8 +133,6 @@ function removeProductFromCart(prId) {
 }
 
 function enableButton(btnId) {
-    console.log('USAO');
-
     $(`#${btnId}`).prop('disabled', false);
 }
 
@@ -131,7 +147,6 @@ function goToStepOne() {
 }
 
 function goToStepTwo() {
-
     $('.stepOne').removeClass('uk-active');
     $('.stepTwo').addClass('uk-active');
     $('.stepThree').removeClass('uk-active');
@@ -169,7 +184,7 @@ function getCustomerFormData() {
         if (d.name === 'napomena') {
             napomena = d.value;
         }
-    })
+    });
 
     customer = new Customer(name, address, zipCode, phoneNumber, napomena);
 }
@@ -186,20 +201,22 @@ function showCustomerDataOnStepThree() {
                             <p>${customer.zipCode}</p>
                             <p>${customer.phoneNumber}</p>
                             <p>${customer.napomena}</p>
-                            `)
+                            `);
 }
 
 function showProductsDataOnStepThree() {
     $('.productInfoTable').html('');
-    productList.filter(pr => pr.numberToOrder > 0).forEach(pr => {
-        $('.productInfoTable').append(`
+    productList
+        .filter(pr => pr.numberToOrder > 0)
+        .forEach(pr => {
+            $('.productInfoTable').append(`
             <tr>
                 <td>${pr.name}</td>
                 <td>${pr.numberToOrder} kom</td>
-                <td>${pr.price*pr.numberToOrder} rsd</td>
+                <td>${pr.price * pr.numberToOrder} rsd</td>
             </tr>
-        `)
-    })
+        `);
+        });
     $('.productInfoTable').append(`
             <tfoot>
             <tr>
@@ -208,9 +225,13 @@ function showProductsDataOnStepThree() {
                 <td>${totalPrice} rsd</td>
             </tr>
             </tfoot>
-        `)
+        `);
 }
 
 function order() {
-    UIkit.notification({ message: 'Hvala na porudzbini! :)', pos: 'top-right', status: 'success' });
+    UIkit.notification({
+        message: 'Hvala na porudzbini! :)',
+        pos: 'top-right',
+        status: 'success'
+    });
 }

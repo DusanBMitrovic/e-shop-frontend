@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <link rel="stylesheet" href="./node_modules/uikit/dist/css/uikit.min.css" />
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/index.css" />
     <script src="./node_modules/uikit/dist/js/uikit.min.js"></script>
     <script src="./node_modules/uikit/dist/js/uikit-icons.min.js"></script>
 
@@ -15,6 +15,13 @@
     <script src="./js/Models/Product.js"></script>
     <script src="./js/Models/Order.js"></script>
     <script src="./js/Models/Customer.js"></script>
+
+    <script src="./js/admin/dataTable.js"></script>
+    <script src="./js/admin/getAllProducts.ts"></script>
+
+    <link rel="stylesheet" type="text/css" href="DataTable/datatables.min.css" />
+    <script type="text/javascript" src="DataTable/datatables.min.js"></script>
+
     <title>Document</title>
 </head>
 
@@ -22,20 +29,18 @@
     <!-- NAVBAR -->
     <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
-
             <ul class="uk-navbar-nav">
                 <li class="uk-active"><a href="./index.html">Pocetna</a></li>
-                <li><a href="./korpa.html">Korpa</a></li>
-                <li><a href="#">Admin</a></li>
+                <li><a href="./index.html">Korpa</a></li>
+                <li><a href="./admin.html">Admin</a></li>
             </ul>
-
         </div>
         <div class="uk-navbar-right">
-
             <ul class="uk-navbar-nav uk-margin-medium-right">
-                <li class="uk-active clickableClass" uk-toggle="target: #offcanvas-push" onclick="logout()">Logout</li>
+                <li class="uk-active clickableClass" uk-toggle="target: #offcanvas-push" onclick="logout()">
+                    Logout
+                </li>
             </ul>
-
         </div>
     </nav>
 
@@ -47,15 +52,29 @@
         </ul>
 
         <ul class="uk-switcher uk-margin">
+            <!-- PROIZVODI SECTION -->
             <li>
                 <h4>Lista proizvoda</h4>
+                <div class="uk-width 1-1">
+                    <!-- TABELA PROIZVODA -->
+                    <table id="productTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Naziv</th>
+                                <th>Opis</th>
+                                <th>Tip proizvoda</th>
+                                <th>Link do slike</th>
+                                <th>Na stanju</th>
+                                <th>Cena</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </li>
             <li>Lista porudzbina</li>
         </ul>
     </div>
-
-
-
 </body>
 
 </html>

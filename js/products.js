@@ -1,20 +1,11 @@
 let productList = [];
+let productsFromDb;
 
-$(document).ready(function() {
+$(document).ready(async function() {
+    await setProductListFromDb();
 
-
-        productList = [
-            new Product('pr1', 'Sapun', 'Higijena', 0, 'Ovo je odlican proizvod po najboljoj ceni. Porucite odmah dok jos postoji na stanju', 200),
-            new Product('pr2', 'Dezodorans', 'Higijena', 100, 'Ovo je odlican proizvod po najboljoj ceni. Porucite odmah dok jos postoji na stanju', 200),
-            new Product('pr3', 'Parfem', 'Higijena', 100, 'Ovo je odlican proizvod po najboljoj ceni. Porucite odmah dok jos postoji na stanju', 150),
-            new Product('pr4', 'Sampon', 'Higijena', 0, 'Ovo je odlican proizvod po najboljoj ceni. Porucite odmah dok jos postoji na stanju', 420),
-            new Product('pr5', 'Peskir', 'Higijena', 100, 'Ovo je odlican proizvod po najboljoj ceni. Porucite odmah dok jos postoji na stanju', 700)
-        ];
-
-
-        productList.forEach(pr => {
-
-            $('#products').append(`
+    productList.forEach(pr => {
+        $('#products').append(`
         <div id="${pr.id}-wrapper" style="position:relative">
         <div class="uk-card uk-card-hover uk-card-default" id="${pr.id}">
             <div class="uk-card-header">
@@ -24,7 +15,7 @@ $(document).ready(function() {
             <div class="uk-card-body">
                 <p>${pr.description}<p>
                 <div class="uk-card-media-bottom">
-                    <img src="./test.jpg" alt="">
+                    <img src="${pr.imageLink}" alt="">
                 </div>
             </div>
             <div class="uk-card-footer">
@@ -34,26 +25,43 @@ $(document).ready(function() {
                 <span class="clickableClass" uk-icon="icon: plus" onclick="addProduct('${pr.id}');"></span>
             </div>
         </div>
-        </div>`)
-        })
+        </div>`);
+    });
 
-
-        checkSoldOutProducts();
-    })
-    // DA SE POZOVE SVAKI KAD PUT KAD SE NESTO PORUCI I NA UCITAVANJU STRANICE !!!
+    checkSoldOutProducts();
+});
+// DA SE POZOVE SVAKI KAD PUT KAD SE NESTO PORUCI I NA UCITAVANJU STRANICE !!!
 function checkSoldOutProducts() {
-
     if (productList.length > 0) {
         productList.forEach(pr => {
             if (pr.numberOnStock === 0) {
-
                 setOutOfStockImg(pr.id);
             }
-        })
+        });
     }
 }
 
 function setOutOfStockImg(prId) {
-    $('#' + prId + '-wrapper').append('<img src="./img/outOfStock.png" style="position: absolute;top: 25%; padding: 63px; left: 5%;">')
+    $('#' + prId + '-wrapper').append(
+        '<img src="./img/outOfStock.png" style="position: absolute;top: 25%; padding: 63px; left: 5%;">'
+    );
     $('#' + prId).addClass('outOfStock');
+}
+
+async function setProductListFromDb() {
+    productsFromDb = await getAllProducts();
+
+    productsFromDb.forEach(obj => {
+        productList.push(
+            new Product(
+                obj.id,
+                obj.name,
+                obj.type,
+                obj.numberOnStock,
+                obj.description,
+                obj.price,
+                obj.image
+            )
+        );
+    });
 }
