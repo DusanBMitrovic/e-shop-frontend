@@ -1,7 +1,7 @@
 var editor;
 $(document).ready(function() {
     editor = new $.fn.dataTable.Editor({
-        ajax: 'https://localhost/e-drogerie/e-drogerie-datatableEditorPHP/reservationTable.php',
+        ajax: 'https://localhost/e-drogerie/e-drogerie-datatableEditor/reservationTable.php',
         table: '#productTable',
         idSrc: 'product.id',
         fields: [{
@@ -45,7 +45,7 @@ $(document).ready(function() {
             { data: 'product.price' }
         ],
         ajax: {
-            url: 'https://localhost/e-drogerie/e-drogerie-datatableEditorPHP/reservationTable.php',
+            url: 'https://localhost/e-drogerie/e-drogerie-datatableEditor/reservationTable.php',
             dataSrc: 'data'
         },
         buttons: [
@@ -54,5 +54,26 @@ $(document).ready(function() {
             { extend: 'remove', editor: editor }
         ],
         select: true
+    });
+});
+
+$(document).ready(function() {
+    console.log('USAO');
+
+    $('#ordersTable').DataTable({
+        columns: [
+            { data: 'id' },
+            { data: 'datetime' },
+            { data: 'customerName' },
+            { data: 'customerAddress' },
+            { data: 'zipCode' },
+            { data: 'phoneNumber' },
+            { data: 'napomena' },
+            { data: 'products[, ].id' }
+        ],
+        ajax: {
+            url: 'http://localhost:3000/orders',
+            dataSrc: ''
+        }
     });
 });

@@ -228,7 +228,36 @@ function showProductsDataOnStepThree() {
         `);
 }
 
-function order() {
+async function order() {
+    let productIdsArray = [];
+    productList.forEach(pr => {
+        if (pr.numberToOrder > 0) {
+            productIdsArray.push(pr.id);
+        }
+    });
+
+    let order = new OrderReq(
+        customer.name,
+        customer.address,
+        customer.phoneNumber,
+        customer.zipCode,
+        customer.napomena,
+        productIdsArray
+    );
+
+    console.log('order: ', order);
+    console.log('order JSON ', JSON.stringify(order));
+
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/orderStaff',
+        data: JSON.stringify(order),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log('Response ', response);
+        }
+    });
+
     UIkit.notification({
         message: 'Hvala na porudzbini! :)',
         pos: 'top-right',
