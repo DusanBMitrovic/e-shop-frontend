@@ -1,6 +1,5 @@
 let productList = [];
 let productsFromDb;
-
 $(document).ready(async function() {
     await setProductListFromDb();
 

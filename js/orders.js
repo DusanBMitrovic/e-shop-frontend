@@ -2,6 +2,7 @@ cartIsEmpty = true;
 productsToOrder = 0;
 let customer = null;
 let totalPrice;
+let insertedCustomer;
 
 function getItemsInCart() {
     $('#cartContent').html('');
@@ -187,6 +188,8 @@ function getCustomerFormData() {
     });
 
     customer = new Customer(name, address, zipCode, phoneNumber, napomena);
+    console.log('Customer: ', customer);
+    console.log('Customer JSON ', JSON.stringify(customer));
 }
 
 function showDataOnStepThree() {
@@ -196,8 +199,8 @@ function showDataOnStepThree() {
 
 function showCustomerDataOnStepThree() {
     $('.customerInfo').html(`
-                            <p>${customer.name}</p>
-                            <p>${customer.address}</p>
+                            <p>${customer.customerName}</p>
+                            <p>${customer.customerAddress}</p>
                             <p>${customer.zipCode}</p>
                             <p>${customer.phoneNumber}</p>
                             <p>${customer.napomena}</p>
@@ -229,38 +232,68 @@ function showProductsDataOnStepThree() {
 }
 
 async function order() {
-    let productIdsArray = [];
-    productList.forEach(pr => {
-        if (pr.numberToOrder > 0) {
-            productIdsArray.push(pr.id);
-        }
-    });
+    await insertCustomer(customer);
 
-    let order = new OrderReq(
-        customer.name,
-        customer.address,
-        customer.phoneNumber,
-        customer.zipCode,
-        customer.napomena,
-        productIdsArray
-    );
+    let orderArray = [];
+    setTimeout(() => {
+        productList.forEach(pr => {
+            if (pr.numberToOrder > 0) {
+                orderArray.push(
+                    new Order(insertedCustomer.id, pr.id, pr.numberToOrder)
+                );
+            }
+        });
 
-    console.log('order: ', order);
-    console.log('order JSON ', JSON.stringify(order));
-
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:3000/orderStaff',
-        data: JSON.stringify(order),
-        contentType: 'application/json',
-        success: function(response) {
-            console.log('Response ', response);
-        }
-    });
+        orderArray.forEach(o => {
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/productToOrder',
+                data: JSON.stringify(o),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log('Response ', response);
+                }
+            });
+        });
+    }, 200);
 
     UIkit.notification({
         message: 'Hvala na porudzbini! :)',
         pos: 'top-right',
         status: 'success'
     });
+}
+
+async function insertCustomer(customer) {
+    console.log('USAO ', customer);
+    // NE MOZE DA SALJE SA CONTENT TYPE JSON, A MORA TAKO
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/orderInfo',
+        data: JSON.stringify(customer),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log('Uspesan dodat proizvod ', response);
+            insertedCustomer = response;
+        },
+        error: function(textStatus, errorThrown) {
+            console.log('Doslo je do greske ', textStatus);
+        }
+    });
+
+    // $.post('http://localhost:3000/orderInfo', JSON.stringify(customer));
+
+    // fetch('http://localhost:3000/productToOrder', {
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: customer,
+    //         method: 'POST'
+    //     })
+    //     .then(res => {
+    //         console.log('response: ', res);
+    //     })
+    //     .catch(error => {
+    //         console.log('error: ', error);
+    //     });
 }

@@ -58,21 +58,21 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    console.log('USAO');
-
     $('#ordersTable').DataTable({
         columns: [
             { data: 'id' },
             { data: 'datetime' },
             { data: 'customerName' },
+            { data: 'phoneNumber' },
             { data: 'customerAddress' },
             { data: 'zipCode' },
-            { data: 'phoneNumber' },
-            { data: 'napomena' },
-            { data: 'products[, ].id' }
+            { data: 'productName' },
+            { data: 'numberToOrder' },
+            { data: 'productPrice' },
+            { data: 'napomena' }
         ],
         ajax: {
-            url: 'http://localhost:3000/orders',
+            url: 'http://localhost:3000/orders2',
             dataSrc: ''
         }
     });

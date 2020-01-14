@@ -1,12 +1,10 @@
 class Order {
-    id;
-    customerId;
-    productIds;
-    date;
-    constructor(id, customerId, productIds, date) {
-        this.id = id;
-        this.customerId = customerId;
-        this.productIds = productIds;
-        this.date = date;
+    orderId;
+    productId;
+    numberToOrder;
+    constructor(orderId, productId, numberToOrder) {
+        this.orderId = orderId;
+        this.productId = productId;
+        this.numberToOrder = numberToOrder;
     }
 }

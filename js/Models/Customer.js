@@ -1,13 +1,13 @@
 class Customer {
-    name;
-    address;
+    customerName;
+    customerAddress;
     zipCode;
     phoneNumber;
     napomena;
 
-    constructor(name, address, zipCode, phoneNumber, napomena) {
-        this.name = name;
-        this.address = address;
+    constructor(customerName, customerAddress, zipCode, phoneNumber, napomena) {
+        this.customerName = customerName;
+        this.customerAddress = customerAddress;
         this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
         this.napomena = napomena;
