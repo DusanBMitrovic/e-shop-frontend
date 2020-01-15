@@ -7,26 +7,26 @@
     /* position: absolute; */
 }
 
-@media (min-width:960px) {
+@media (min-width: 960px) {
     .uk-offcanvas-bar {
         left: -500px;
         width: 500px;
-        padding: 40px 40px
+        padding: 40px 40px;
     }
 }
 
-@media (min-width:960px) {
+@media (min-width: 960px) {
     .uk-offcanvas-flip .uk-offcanvas-bar {
-        right: -500px
+        right: -500px;
     }
 }
 
-@media (min-width:960px) {
+@media (min-width: 960px) {
      :not(.uk-offcanvas-flip).uk-offcanvas-container-animation {
-        left: 500px
+        left: 500px;
     }
     .uk-offcanvas-flip.uk-offcanvas-container-animation {
-        left: -500px
+        left: -500px;
     }
 }
 
@@ -44,4 +44,8 @@
     padding-left: 0;
     padding-top: 0;
     padding-bottom: 5px;
+}
+
+#map {
+    height: 300px;
 }

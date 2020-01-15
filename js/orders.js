@@ -24,7 +24,7 @@ function getItemsInCart() {
         pr.id
       }');"> +</span></td>
                 <td class="uk-text-nowrap price">${pr.price *
-                  pr.numberToOrder} rsd</td>
+                  pr.numberToOrder} ${valuta}</td>
             </tr>
         `);
             productsToOrder = productsToOrder + pr.numberToOrder;
@@ -112,7 +112,7 @@ function updateTotalPrice() {
             console.log('total price: ', totalPrice);
         });
     let numberToChange = document.getElementsByClassName('totalPrice')[0];
-    numberToChange.textContent = `${totalPrice}`;
+    numberToChange.textContent = `${totalPrice.toFixed(2)}`;
 }
 
 function removeProductFromCart(prId) {

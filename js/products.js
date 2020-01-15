@@ -1,5 +1,6 @@
 let productList = [];
 let productsFromDb;
+
 $(document).ready(async function() {
     await setProductListFromDb();
 
@@ -9,7 +10,8 @@ $(document).ready(async function() {
         <div class="uk-card uk-card-hover uk-card-default" id="${pr.id}">
             <div class="uk-card-header">
                 <h3 class="uk-card-title">${pr.name}</h3>
-                <span class="uk-text">${pr.price} rsd</span>
+                <span class="uk-text price" id="${pr.id}_price">${pr.price} </span>
+                <span class="currency">${valuta}</span>
             </div>
             <div class="uk-card-body">
                 <p>${pr.description}<p>
@@ -29,7 +31,7 @@ $(document).ready(async function() {
 
     checkSoldOutProducts();
 });
-// DA SE POZOVE SVAKI KAD PUT KAD SE NESTO PORUCI I NA UCITAVANJU STRANICE !!!
+// DA SE POZOVE SVAKI PUT KAD SE NESTO PORUCI I NA UCITAVANJU STRANICE !!!
 function checkSoldOutProducts() {
     if (productList.length > 0) {
         productList.forEach(pr => {
