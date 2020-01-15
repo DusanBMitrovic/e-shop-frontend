@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./js/login.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="./node_modules/uikit/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <script src="./node_modules/uikit/dist/js/uikit.min.js"></script>
+    <script src="./node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="./index.html">Pocetna</a></li>
+                <li><a href="./admin.html">Admin</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right"></div>
+    </nav>
+
+    <div class="uk-width-1-3 uk-align-center">
+        <form id="login_form" onsubmit="return false" class="uk-form-stacked uk-width-auto">
+            <div class="uk-align-center" style="text-align: center;">
+                <h3 class="uk-text-muted">Morate da se ulogujete</h3>
+                <hr class="uk-divider-icon" />
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                            <input class="uk-input" id="form_username" name="username" type="text" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                            <input class="uk-input" id="form_password" name="password" type="password" required />
+                        </div>
+                    </div>
+                </div>
+                <div id="loginBtnDiv">
+                    <button class="uk-button uk-button-default loginBtn" onclick="login()">
+              Login
+            </button>
+                </div>
+            </div>
+            <div id="spinner_div" style="text-align: center; color: green;"></div>
+            <hr class="uk-divider-icon" />
+        </form>
+    </div>
+</body>
+
+</html>

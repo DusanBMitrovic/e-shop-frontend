@@ -5,6 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- CHECK IF USER IS LOGGED IN -->
+    <script>
+        let status = localStorage.getItem('status');
+        console.log('status ', status);
+
+        if (!status) {
+            window.location.replace(
+                'http://localhost/e-drogerie/e-drogerie-front/login.html'
+            );
+        } else {
+            console.log('USER IS LOGGED IN');
+        }
+    </script>
+
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
@@ -20,6 +34,7 @@
 
     <script src="./js/admin/dataTable.js"></script>
     <script src="./js/admin/getAllProducts.ts"></script>
+    <script src="./js/login.js"></script>
 
     <link rel="stylesheet" type="text/css" href="DataTable/datatables.min.css" />
     <script type="text/javascript" src="DataTable/datatables.min.js"></script>
@@ -38,7 +53,10 @@
         </div>
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav uk-margin-medium-right">
-                <li class="uk-active clickableClass" uk-toggle="target: #offcanvas-push" onclick="logout()">
+                <li class="uk-active uk-margin-medium-right">
+                    Dusan
+                </li>
+                <li class="uk-active clickableClass" onclick="logout()">
                     Logout
                 </li>
             </ul>
