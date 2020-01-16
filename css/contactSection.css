@@ -1,0 +1,25 @@
+.contactDiv {
+    background-color: rgb(34, 34, 34);
+}
+
+.contactInfo {
+    block-size: auto !important;
+    /* border: solid grey !important;
+    border-left: none !important;
+    border-top: none !important;
+    border-width: 1px !important;
+    border-bottom: none !important; */
+}
+
+.contactSocials {
+    block-size: auto !important;
+    /* border: solid grey !important;
+    border-left: none !important;
+    border-top: none !important;
+    border-width: 1px !important;
+    border-bottom: none !important; */
+}
+
+.activeCurrency {
+    text-decoration: underline;
+}
